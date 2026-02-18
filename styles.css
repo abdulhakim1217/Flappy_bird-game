@@ -10,6 +10,78 @@ body {
   background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
   min-height: 100vh;
   width: 100vw;
+  position: relative;
+}
+
+/* Hamburger Menu Button */
+.hamburger-menu {
+  display: none;
+  position: fixed;
+  top: 20px;
+  left: 20px;
+  z-index: 1001;
+  background: rgba(255, 255, 255, 0.95);
+  border: none;
+  border-radius: 10px;
+  width: 50px;
+  height: 50px;
+  cursor: pointer;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 6px;
+  padding: 10px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+  transition: transform 0.2s;
+}
+
+.hamburger-menu:active {
+  transform: scale(0.95);
+}
+
+.hamburger-menu span {
+  display: block;
+  width: 25px;
+  height: 3px;
+  background: #667eea;
+  border-radius: 2px;
+  transition: all 0.3s;
+}
+
+/* Close Button */
+.close-menu {
+  display: none;
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  background: transparent;
+  border: none;
+  font-size: 35px;
+  color: #667eea;
+  cursor: pointer;
+  width: 40px;
+  height: 40px;
+  line-height: 35px;
+  text-align: center;
+  z-index: 10;
+}
+
+/* Info Panel Overlay */
+.info-panel-overlay {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 999;
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+.info-panel-overlay.active {
+  opacity: 1;
 }
 
 .game-container {
@@ -123,17 +195,45 @@ body {
     align-items: flex-start;
     padding-top: 20px;
   }
+
+  /* Show hamburger menu on mobile */
+  .hamburger-menu {
+    display: flex;
+  }
+
+  /* Show close button on mobile */
+  .close-menu {
+    display: block;
+  }
+
+  /* Show overlay on mobile */
+  .info-panel-overlay {
+    display: block;
+  }
   
   .game-container {
     flex-direction: column;
     gap: 15px;
     padding: 10px;
+    padding-top: 80px;
   }
   
   .info-panel {
-    max-width: 90%;
-    width: 90%;
-    padding: 15px;
+    position: fixed;
+    top: 0;
+    left: -100%;
+    width: 85%;
+    max-width: 350px;
+    height: 100vh;
+    padding: 60px 20px 20px 20px;
+    z-index: 1000;
+    overflow-y: auto;
+    transition: left 0.3s ease-in-out;
+    box-shadow: 2px 0 15px rgba(0, 0, 0, 0.3);
+  }
+
+  .info-panel.active {
+    left: 0;
   }
   
   .info-panel h1 {
@@ -167,6 +267,20 @@ body {
   body {
     padding-top: 10px;
   }
+
+  .hamburger-menu {
+    display: flex;
+    top: 10px;
+    left: 10px;
+  }
+
+  .close-menu {
+    display: block;
+  }
+
+  .info-panel-overlay {
+    display: block;
+  }
   
   .game-container {
     flex-direction: row;
@@ -174,9 +288,21 @@ body {
   }
   
   .info-panel {
-    max-width: 250px;
-    padding: 10px;
+    position: fixed;
+    top: 0;
+    left: -100%;
+    width: 70%;
+    max-width: 300px;
+    height: 100vh;
+    padding: 50px 15px 15px 15px;
     font-size: 12px;
+    overflow-y: auto;
+    z-index: 1000;
+    transition: left 0.3s ease-in-out;
+  }
+
+  .info-panel.active {
+    left: 0;
   }
   
   .info-panel h1 {
@@ -210,16 +336,24 @@ body {
   body {
     padding-top: 10px;
   }
+
+  .hamburger-menu {
+    top: 15px;
+    left: 15px;
+    width: 45px;
+    height: 45px;
+  }
   
   .game-container {
     padding: 5px;
     gap: 10px;
+    padding-top: 70px;
   }
   
   .info-panel {
-    max-width: 95%;
-    width: 95%;
-    padding: 12px;
+    width: 80%;
+    max-width: 300px;
+    padding: 50px 15px 15px 15px;
   }
   
   .info-panel h1 {

@@ -4,7 +4,7 @@
   <title>Flappy Bird </title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
-  <meta name="description" content="Enhanced Flappy Bird game with power-ups, achievements, and more!">
+  <meta name="description" content="Flappy Bird game with power-ups, achievements, and more!">
   <link rel="stylesheet" href="styles.css">
   <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css?family=Pacifico" rel="stylesheet">
@@ -18,7 +18,17 @@
   <audio id="scoreSound" src="https://assets.mixkit.co/sfx/preview/mixkit-coin-win-notification-1992.mp3"></audio>
 
   <div class="game-container">
-    <div class="info-panel">
+    <!-- Hamburger Menu Button (Mobile Only) -->
+    <button class="hamburger-menu" id="hamburgerBtn" aria-label="Toggle menu">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+
+    <!-- Info Panel with overlay for mobile -->
+    <div class="info-panel-overlay" id="infoPanelOverlay"></div>
+    <div class="info-panel" id="infoPanel">
+      <button class="close-menu" id="closeMenuBtn" aria-label="Close menu">&times;</button>
       <h1>🐦 Flappy Bird </h1>
       <div class="features">
         <h3>Features:</h3>
@@ -46,5 +56,28 @@
   </div>
 
   <script src="script.js"></script>
+  <script>
+    // Hamburger menu functionality
+    const hamburgerBtn = document.getElementById('hamburgerBtn');
+    const infoPanel = document.getElementById('infoPanel');
+    const infoPanelOverlay = document.getElementById('infoPanelOverlay');
+    const closeMenuBtn = document.getElementById('closeMenuBtn');
+
+    function openMenu() {
+      infoPanel.classList.add('active');
+      infoPanelOverlay.classList.add('active');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeMenu() {
+      infoPanel.classList.remove('active');
+      infoPanelOverlay.classList.remove('active');
+      document.body.style.overflow = '';
+    }
+
+    hamburgerBtn.addEventListener('click', openMenu);
+    closeMenuBtn.addEventListener('click', closeMenu);
+    infoPanelOverlay.addEventListener('click', closeMenu);
+  </script>
 </body>
 </html>
