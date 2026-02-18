@@ -1,19 +1,317 @@
 body {
-  font-family: 'Pacifico', cursive;
+  font-family: 'Montserrat', sans-serif;
   display: flex;
   justify-content: center;
+  align-items: center;
   margin: 0;
   padding: 0;
   touch-action: manipulation;
   overflow: hidden;
-  background: #70c5ce;
-  height: 100vh;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  min-height: 100vh;
+  width: 100vw;
+}
+
+.game-container {
+  display: flex;
+  gap: 30px;
+  align-items: center;
+  padding: 20px;
+  flex-wrap: wrap;
+  justify-content: center;
+  max-width: 100%;
+  width: 100%;
+}
+
+.info-panel {
+  background: rgba(255, 255, 255, 0.95);
+  padding: 25px;
+  border-radius: 20px;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+  max-width: 300px;
+  font-family: 'Montserrat', sans-serif;
+  flex-shrink: 0;
+}
+
+.info-panel h1 {
+  font-family: 'Pacifico', cursive;
+  color: #667eea;
+  margin: 0 0 20px 0;
+  font-size: 28px;
+  text-align: center;
+}
+
+.info-panel h3 {
+  font-family: 'Montserrat', sans-serif;
+  color: #764ba2;
+  margin: 15px 0 10px 0;
+  font-size: 18px;
+  border-bottom: 2px solid #667eea;
+  padding-bottom: 5px;
+}
+
+.features ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.features li {
+  padding: 5px 0;
+  color: #333;
+  font-size: 14px;
+  font-family: 'Montserrat', sans-serif;
+}
+
+.controls p {
+  margin: 8px 0;
+  color: #555;
+  font-size: 14px;
+  font-family: 'Montserrat', sans-serif;
 }
 
 #myCanvas {
-  border: 1px solid #0a3cda;
-  margin: 10px auto;
+  border: 5px solid #fff;
+  border-radius: 15px;
+  box-shadow: 0 15px 50px rgba(0, 0, 0, 0.4);
   background: url('http://s2js.com/img/etc/flappyback.png');
-  background-size: 100%;
-  max-height: 95%;
+  background-size: cover;
+  cursor: pointer;
+  transition: transform 0.2s;
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+#myCanvas:hover {
+  transform: scale(1.02);
+}
+
+#myCanvas:active {
+  transform: scale(0.98);
+}
+
+/* Tablet and smaller laptops (landscape) */
+@media (max-width: 1024px) {
+  .game-container {
+    gap: 20px;
+    padding: 15px;
+  }
+  
+  .info-panel {
+    max-width: 280px;
+    padding: 20px;
+  }
+  
+  .info-panel h1 {
+    font-size: 24px;
+  }
+  
+  .info-panel h3 {
+    font-size: 16px;
+  }
+  
+  #myCanvas {
+    max-width: 450px;
+  }
+}
+
+/* Tablets (portrait) */
+@media (max-width: 768px) {
+  body {
+    min-height: 100vh;
+    align-items: flex-start;
+    padding-top: 20px;
+  }
+  
+  .game-container {
+    flex-direction: column;
+    gap: 15px;
+    padding: 10px;
+  }
+  
+  .info-panel {
+    max-width: 90%;
+    width: 90%;
+    padding: 15px;
+  }
+  
+  .info-panel h1 {
+    font-size: 22px;
+    margin-bottom: 15px;
+  }
+  
+  .info-panel h3 {
+    font-size: 15px;
+  }
+  
+  .features li {
+    font-size: 13px;
+    padding: 4px 0;
+  }
+  
+  .controls p {
+    font-size: 13px;
+  }
+  
+  #myCanvas {
+    max-width: 90vw;
+    width: 90vw;
+    height: auto;
+    border-width: 3px;
+  }
+}
+
+/* Mobile phones (landscape) */
+@media (max-width: 768px) and (orientation: landscape) {
+  body {
+    padding-top: 10px;
+  }
+  
+  .game-container {
+    flex-direction: row;
+    gap: 10px;
+  }
+  
+  .info-panel {
+    max-width: 250px;
+    padding: 10px;
+    font-size: 12px;
+  }
+  
+  .info-panel h1 {
+    font-size: 18px;
+    margin-bottom: 10px;
+  }
+  
+  .info-panel h3 {
+    font-size: 14px;
+    margin: 10px 0 5px 0;
+  }
+  
+  .features li {
+    font-size: 11px;
+    padding: 3px 0;
+  }
+  
+  .controls p {
+    font-size: 11px;
+    margin: 5px 0;
+  }
+  
+  #myCanvas {
+    max-width: 50vw;
+    max-height: 85vh;
+  }
+}
+
+/* Mobile phones (portrait) */
+@media (max-width: 480px) {
+  body {
+    padding-top: 10px;
+  }
+  
+  .game-container {
+    padding: 5px;
+    gap: 10px;
+  }
+  
+  .info-panel {
+    max-width: 95%;
+    width: 95%;
+    padding: 12px;
+  }
+  
+  .info-panel h1 {
+    font-size: 20px;
+    margin-bottom: 12px;
+  }
+  
+  .info-panel h3 {
+    font-size: 14px;
+    margin: 12px 0 8px 0;
+  }
+  
+  .features li {
+    font-size: 12px;
+    padding: 3px 0;
+  }
+  
+  .controls p {
+    font-size: 12px;
+    margin: 6px 0;
+  }
+  
+  #myCanvas {
+    max-width: 95vw;
+    width: 95vw;
+    height: auto;
+    border-width: 2px;
+    border-radius: 10px;
+  }
+  
+  #myCanvas:hover {
+    transform: none;
+  }
+}
+
+/* Small mobile phones */
+@media (max-width: 360px) {
+  .info-panel {
+    padding: 10px;
+  }
+  
+  .info-panel h1 {
+    font-size: 18px;
+  }
+  
+  .info-panel h3 {
+    font-size: 13px;
+  }
+  
+  .features li {
+    font-size: 11px;
+  }
+  
+  .controls p {
+    font-size: 11px;
+  }
+}
+
+/* Large screens */
+@media (min-width: 1440px) {
+  .game-container {
+    gap: 40px;
+  }
+  
+  .info-panel {
+    max-width: 350px;
+    padding: 30px;
+  }
+  
+  .info-panel h1 {
+    font-size: 32px;
+  }
+  
+  #myCanvas {
+    max-width: 500px;
+  }
+}
+
+/* Loading animation */
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.5; }
+}
+
+.loading {
+  animation: pulse 1.5s infinite;
+}
+
+/* Ensure canvas maintains aspect ratio */
+@media (max-width: 768px) {
+  #myCanvas {
+    aspect-ratio: 2/3;
+    object-fit: contain;
+  }
 }

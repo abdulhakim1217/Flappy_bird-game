@@ -1,21 +1,49 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Flappy_Bird</title>
+  <title>Flappy Bird </title>
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+  <meta name="description" content="Enhanced Flappy Bird game with power-ups, achievements, and more!">
   <link rel="stylesheet" href="styles.css">
-  <link href="https://fonts.googleapis.com/css?family=montserrat" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Pacifico" rel="stylesheet">
 </head>
 <body>
   <!-- Sound Elements -->
-  <audio id="flapSound" src=""></audio>
+  <audio id="flapSound" src="https://assets.mixkit.co/sfx/preview/mixkit-bird-flapping-wings-1216.mp3"></audio>
   <audio id="hitSound" src="https://assets.mixkit.co/sfx/preview/mixkit-arcade-game-explosion-2759.mp3"></audio>
-  <audio id="gameOverSound" src="./audio/flappy_game_over.wav"></audio>
+  <audio id="gameOverSound" src="https://assets.mixkit.co/sfx/preview/mixkit-player-losing-or-failing-2042.mp3"></audio>
   <audio id="backgroundMusic" loop src="./audio/famy_ava_aac_48606.m4a"></audio>
-  <audio id="scoreSound" src=""></audio>
+  <audio id="scoreSound" src="https://assets.mixkit.co/sfx/preview/mixkit-coin-win-notification-1992.mp3"></audio>
 
-  <canvas id="myCanvas" width="320" height="480"></canvas>
+  <div class="game-container">
+    <div class="info-panel">
+      <h1>🐦 Flappy Bird </h1>
+      <div class="features">
+        <h3>Features:</h3>
+        <ul>
+          <li>✨ Particle Effects</li>
+          <li>🎯 Power-ups (Shield, Slow-Mo, Magnet, 2x Points)</li>
+          <li>🏆 Achievements System</li>
+          <li>💰 Collectible Coins</li>
+          <li>🔥 Combo Multipliers</li>
+          <li>❤️ Lives System</li>
+          <li>🌅 Day/Night Cycle</li>
+          <li>📊 Statistics Tracking</li>
+          <li>🏅 Leaderboard</li>
+          <li>⏸️ Pause Menu (Press P)</li>
+        </ul>
+      </div>
+      <div class="controls">
+        <h3>Controls:</h3>
+        <p>🖱️ Click / Tap / Space - Flap</p>
+        <p>⏸️ P / ESC - Pause</p>
+      </div>
+    </div>
+    
+    <canvas id="myCanvas" width="400" height="600"></canvas>
+  </div>
 
   <script src="script.js"></script>
 </body>
