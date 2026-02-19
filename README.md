@@ -2,7 +2,6 @@
 
 A fully-featured, modern remake of the classic Flappy Bird game with tons of exciting additions!
 
-**Original Demo:** https://0xflappy-birdgame.netlify.app/
 
 ## 🎮 How to Play
 
