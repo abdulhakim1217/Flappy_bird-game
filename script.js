@@ -80,8 +80,8 @@ let stats = JSON.parse(localStorage.getItem('gameStats')) || {
 };
 
 // Lives system
-let lives = 3;
-let maxLives = 3;
+let lives = 1; // Changed to 1 life - game over on first hit
+let maxLives = 1;
 let invincible = 0;
 
 // Camera shake
@@ -483,30 +483,15 @@ function make_bird_slow_and_fall() {
     bird.velocity_y += acceleration * slowFactor;
   }
   
+  // Hit top or bottom boundary - game over immediately
   if (bird.y > myCanvas.height - bird.MyImg.height || bird.y < 0) {
-    if (activePowerups.shield > 0) {
-      bird.y = Math.max(0, Math.min(bird.y, myCanvas.height - bird.MyImg.height));
-      bird.velocity_y = 0;
-      activePowerups.shield = 0;
-      createParticles(bird.x + 15, bird.y + 15, '#00FFFF', 15);
-      return;
-    }
-    
-    lives--;
-    if (lives > 0) {
-      bird.y = myCanvas.height / 2;
-      bird.velocity_y = 0;
-      invincible = 60;
-      createParticles(bird.x + 15, bird.y + 15, '#FF0000', 20);
-    } else {
-      bird.velocity_y = 0;
-      if (game_mode !== 'over') {
-        hitSound.play();
-        vibrateDevice();
-        shakeAmount = 15;
-        setTimeout(() => gameOverSound.play(), 300);
-        endGame();
-      }
+    bird.velocity_y = 0;
+    if (game_mode !== 'over') {
+      hitSound.play();
+      vibrateDevice();
+      shakeAmount = 15;
+      setTimeout(() => gameOverSound.play(), 300);
+      endGame();
     }
   }
 }
@@ -649,33 +634,16 @@ function show_the_pipes() {
 }
 
 function check_for_end_game() {
-  if (invincible > 0) return;
-  
+  // No invincibility - game over on any hit
   for (const pipe of pipes) {
     if (ImagesTouching(bird, pipe)) {
-      if (activePowerups.shield > 0) {
-        activePowerups.shield = 0;
-        createParticles(bird.x + 15, bird.y + 15, '#00FFFF', 20);
-        shakeAmount = 5;
-        return;
-      }
-      
-      lives--;
-      if (lives > 0) {
-        invincible = 60;
-        bird.y = myCanvas.height / 2;
-        bird.velocity_y = 0;
-        createParticles(bird.x + 15, bird.y + 15, '#FF0000', 20);
-        shakeAmount = 10;
-      } else {
-        if (game_mode !== 'over') {
-          hitSound.play();
-          vibrateDevice();
-          shakeAmount = 15;
-          createParticles(bird.x + 15, bird.y + 15, '#FF0000', 30);
-          setTimeout(() => gameOverSound.play(), 300);
-          endGame();
-        }
+      if (game_mode !== 'over') {
+        hitSound.play();
+        vibrateDevice();
+        shakeAmount = 15;
+        createParticles(bird.x + 15, bird.y + 15, '#FF0000', 30);
+        setTimeout(() => gameOverSound.play(), 300);
+        endGame();
       }
       return;
     }
@@ -813,9 +781,9 @@ function reset_game() {
   lastPipePassed = null;
   currentLevel = 1;
   pipe_speed = BASE_PIPE_SPEED;
-  currentGapSize = 140;
+  currentGapSize = 160;
   levelUpAnimation = 0;
-  lives = maxLives;
+  lives = 1;
   invincible = 0;
   comboCount = 0;
   comboTimer = 0;
@@ -1002,11 +970,6 @@ function display_level_info() {
   ctx.strokeText(`Score: ${score}`, 10, 48);
   ctx.fillText(`Score: ${score}`, 10, 48);
   
-  // Lives
-  ctx.textAlign = 'right';
-  ctx.strokeText(`Lives: ${'❤️'.repeat(lives)}`, myCanvas.width - 10, 25);
-  ctx.fillText(`Lives: ${'❤️'.repeat(lives)}`, myCanvas.width - 10, 25);
-  
   // Combo
   if (comboCount > 1) {
     ctx.textAlign = 'center';
@@ -1168,16 +1131,7 @@ function Do_a_Frame() {
         updatePowerups();
         updateParticles();
         
-        if (invincible > 0) {
-          invincible--;
-          // Flashing effect
-          if (Math.floor(invincible / 5) % 2 === 0) {
-            ctx.globalAlpha = 0.5;
-          }
-        }
-        
         bird.Do_Frame_Things();
-        ctx.globalAlpha = 1;
         
         display_level_info();
         
