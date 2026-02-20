@@ -4,20 +4,20 @@
 
 // Game Constants
 const FPS = 60;
-const jump_amount = -11;
-const max_fall_speed = 10;
-const acceleration = 0.8;
-const BASE_PIPE_SPEED = -3;
+const jump_amount = -9;
+const max_fall_speed = 8;
+const acceleration = 0.6;
+const BASE_PIPE_SPEED = -2;
 
 // Level System
 const LEVELS = [
-  { level: 1, speedMultiplier: 1.0, scoreThreshold: 0, gapSize: 140, name: "Beginner" },
-  { level: 2, speedMultiplier: 1.3, scoreThreshold: 50, gapSize: 135, name: "Easy" },
-  { level: 3, speedMultiplier: 1.6, scoreThreshold: 100, gapSize: 130, name: "Medium" },
-  { level: 4, speedMultiplier: 1.9, scoreThreshold: 150, gapSize: 125, name: "Hard" },
-  { level: 5, speedMultiplier: 2.2, scoreThreshold: 200, gapSize: 120, name: "Expert" },
-  { level: 6, speedMultiplier: 2.5, scoreThreshold: 250, gapSize: 115, name: "Master" },
-  { level: 7, speedMultiplier: 2.8, scoreThreshold: 300, gapSize: 110, name: "Insane" }
+  { level: 1, speedMultiplier: 0.8, scoreThreshold: 0, gapSize: 160, name: "Beginner" },
+  { level: 2, speedMultiplier: 1.0, scoreThreshold: 50, gapSize: 150, name: "Easy" },
+  { level: 3, speedMultiplier: 1.2, scoreThreshold: 100, gapSize: 140, name: "Medium" },
+  { level: 4, speedMultiplier: 1.4, scoreThreshold: 150, gapSize: 130, name: "Hard" },
+  { level: 5, speedMultiplier: 1.6, scoreThreshold: 200, gapSize: 120, name: "Expert" },
+  { level: 6, speedMultiplier: 1.8, scoreThreshold: 250, gapSize: 115, name: "Master" },
+  { level: 7, speedMultiplier: 2.0, scoreThreshold: 300, gapSize: 110, name: "Insane" }
 ];
 
 // Power-up Types
@@ -114,21 +114,30 @@ const ctx = myCanvas.getContext('2d');
 // Make canvas responsive
 function resizeCanvas() {
   const container = document.querySelector('.game-container');
-  const maxWidth = window.innerWidth > 768 ? 400 : Math.min(window.innerWidth * 0.95, 400);
-  const maxHeight = window.innerWidth > 768 ? 600 : Math.min(window.innerHeight * 0.7, 600);
+  const isMobile = window.innerWidth <= 768;
   
-  // Maintain aspect ratio
-  const aspectRatio = 2 / 3;
-  let width = maxWidth;
-  let height = width / aspectRatio;
-  
-  if (height > maxHeight) {
-    height = maxHeight;
-    width = height * aspectRatio;
+  if (isMobile) {
+    // On mobile, fill the entire viewport
+    myCanvas.width = window.innerWidth;
+    myCanvas.height = window.innerHeight;
+  } else {
+    // On desktop, use fixed size with aspect ratio
+    const maxWidth = Math.min(window.innerWidth * 0.5, 400);
+    const maxHeight = Math.min(window.innerHeight * 0.9, 600);
+    
+    // Maintain aspect ratio
+    const aspectRatio = 2 / 3;
+    let width = maxWidth;
+    let height = width / aspectRatio;
+    
+    if (height > maxHeight) {
+      height = maxHeight;
+      width = height * aspectRatio;
+    }
+    
+    myCanvas.width = width;
+    myCanvas.height = height;
   }
-  
-  myCanvas.width = width;
-  myCanvas.height = height;
   
   // Reposition bird if needed
   if (bird) {
@@ -142,6 +151,7 @@ function resizeCanvas() {
 // Call on load and resize
 window.addEventListener('load', resizeCanvas);
 window.addEventListener('resize', resizeCanvas);
+window.addEventListener('orientationchange', resizeCanvas);
 
 // Sound Elements
 const flapSound = document.getElementById("flapSound");

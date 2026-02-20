@@ -63,21 +63,67 @@
     const infoPanelOverlay = document.getElementById('infoPanelOverlay');
     const closeMenuBtn = document.getElementById('closeMenuBtn');
 
-    function openMenu() {
+    function openMenu(e) {
+      e.stopPropagation(); // Prevent game from receiving click
+      
+      // Pause the game if it's running
+      if (typeof game_mode !== 'undefined' && game_mode === 'running' && typeof isPaused !== 'undefined') {
+        isPaused = true;
+        if (typeof backgroundMusic !== 'undefined') {
+          backgroundMusic.pause();
+        }
+      }
+      
       infoPanel.classList.add('active');
       infoPanelOverlay.classList.add('active');
       document.body.style.overflow = 'hidden';
     }
 
-    function closeMenu() {
+    function closeMenu(e) {
+      e.stopPropagation(); // Prevent game from receiving click
+      
+      // Resume the game if it was running
+      if (typeof game_mode !== 'undefined' && game_mode === 'running' && typeof isPaused !== 'undefined') {
+        isPaused = false;
+        if (typeof backgroundMusic !== 'undefined') {
+          backgroundMusic.play();
+        }
+      }
+      
       infoPanel.classList.remove('active');
       infoPanelOverlay.classList.remove('active');
       document.body.style.overflow = '';
     }
 
+    // Prevent all clicks inside menu from affecting the game
     hamburgerBtn.addEventListener('click', openMenu);
+    hamburgerBtn.addEventListener('touchstart', (e) => {
+      e.stopPropagation();
+      e.preventDefault();
+      openMenu(e);
+    });
+
     closeMenuBtn.addEventListener('click', closeMenu);
+    closeMenuBtn.addEventListener('touchstart', (e) => {
+      e.stopPropagation();
+      e.preventDefault();
+      closeMenu(e);
+    });
+
     infoPanelOverlay.addEventListener('click', closeMenu);
+    infoPanelOverlay.addEventListener('touchstart', (e) => {
+      e.stopPropagation();
+      e.preventDefault();
+      closeMenu(e);
+    });
+
+    // Prevent clicks inside the panel from closing it or affecting game
+    infoPanel.addEventListener('click', (e) => {
+      e.stopPropagation();
+    });
+    infoPanel.addEventListener('touchstart', (e) => {
+      e.stopPropagation();
+    });
   </script>
 </body>
 </html>

@@ -33,6 +33,7 @@ body {
   padding: 10px;
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
   transition: transform 0.2s;
+  pointer-events: auto;
 }
 
 .hamburger-menu:active {
@@ -46,6 +47,7 @@ body {
   background: #667eea;
   border-radius: 2px;
   transition: all 0.3s;
+  pointer-events: none;
 }
 
 /* Close Button */
@@ -64,6 +66,7 @@ body {
   line-height: 35px;
   text-align: center;
   z-index: 10;
+  pointer-events: auto;
 }
 
 /* Info Panel Overlay */
@@ -78,10 +81,12 @@ body {
   z-index: 999;
   opacity: 0;
   transition: opacity 0.3s;
+  pointer-events: none;
 }
 
 .info-panel-overlay.active {
   opacity: 1;
+  pointer-events: auto;
 }
 
 .game-container {
@@ -153,6 +158,7 @@ body {
   max-width: 100%;
   height: auto;
   display: block;
+  touch-action: manipulation;
 }
 
 #myCanvas:hover {
@@ -192,8 +198,10 @@ body {
 @media (max-width: 768px) {
   body {
     min-height: 100vh;
-    align-items: flex-start;
-    padding-top: 20px;
+    height: 100vh;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
   }
 
   /* Show hamburger menu on mobile */
@@ -213,9 +221,12 @@ body {
   
   .game-container {
     flex-direction: column;
-    gap: 15px;
-    padding: 10px;
-    padding-top: 80px;
+    gap: 0;
+    padding: 0;
+    width: 100vw;
+    height: 100vh;
+    align-items: center;
+    justify-content: center;
   }
   
   .info-panel {
@@ -230,6 +241,7 @@ body {
     overflow-y: auto;
     transition: left 0.3s ease-in-out;
     box-shadow: 2px 0 15px rgba(0, 0, 0, 0.3);
+    pointer-events: auto;
   }
 
   .info-panel.active {
@@ -255,17 +267,21 @@ body {
   }
   
   #myCanvas {
-    max-width: 90vw;
-    width: 90vw;
-    height: auto;
-    border-width: 3px;
+    width: 100vw !important;
+    height: 100vh !important;
+    max-width: 100vw !important;
+    max-height: 100vh !important;
+    border: none;
+    border-radius: 0;
+    margin: 0;
   }
 }
 
 /* Mobile phones (landscape) */
 @media (max-width: 768px) and (orientation: landscape) {
   body {
-    padding-top: 10px;
+    padding: 0;
+    height: 100vh;
   }
 
   .hamburger-menu {
@@ -284,7 +300,10 @@ body {
   
   .game-container {
     flex-direction: row;
-    gap: 10px;
+    gap: 0;
+    padding: 0;
+    width: 100vw;
+    height: 100vh;
   }
   
   .info-panel {
@@ -326,15 +345,20 @@ body {
   }
   
   #myCanvas {
-    max-width: 50vw;
-    max-height: 85vh;
+    width: 100vw !important;
+    height: 100vh !important;
+    max-width: 100vw !important;
+    max-height: 100vh !important;
+    border: none;
+    border-radius: 0;
   }
 }
 
 /* Mobile phones (portrait) */
 @media (max-width: 480px) {
   body {
-    padding-top: 10px;
+    padding: 0;
+    height: 100vh;
   }
 
   .hamburger-menu {
@@ -345,9 +369,10 @@ body {
   }
   
   .game-container {
-    padding: 5px;
-    gap: 10px;
-    padding-top: 70px;
+    padding: 0;
+    gap: 0;
+    width: 100vw;
+    height: 100vh;
   }
   
   .info-panel {
@@ -377,11 +402,12 @@ body {
   }
   
   #myCanvas {
-    max-width: 95vw;
-    width: 95vw;
-    height: auto;
-    border-width: 2px;
-    border-radius: 10px;
+    width: 100vw !important;
+    height: 100vh !important;
+    max-width: 100vw !important;
+    max-height: 100vh !important;
+    border: none;
+    border-radius: 0;
   }
   
   #myCanvas:hover {
